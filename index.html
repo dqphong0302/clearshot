@@ -70,37 +70,36 @@
     </div>
   </header>
 
-  <!-- Main Showcase & Processing Area -->
+  <!-- Main Compact Single-Page Area -->
   <main id="main-content" class="main-wrapper pd-main cs-main">
     <div class="container cs-container">
 
-      <!-- Section 1: Hero Banner -->
-      <section class="cs-hero-card">
+      <!-- Compact Hero Header -->
+      <section class="cs-hero-header">
         <div class="cs-badge-group">
           <span class="cs-hero-badge primary">✨ 100% Client-Side</span>
           <span class="cs-hero-badge indigo">🛡️ Gỡ C2PA &amp; AI Prompt</span>
-          <span class="cs-hero-badge emerald">🔒 Zero Server Uploads</span>
-          <span class="cs-hero-badge amber">📍 Xóa Tọa Độ GPS &amp; Serial</span>
+          <span class="cs-hero-badge emerald">🔒 Zero Uploads</span>
         </div>
-        <h1 class="cs-hero-title">ClearShot — Xóa Dấu Vết &amp; Metadata Ảnh Riêng Tư</h1>
+        <h1 class="cs-hero-title">ClearShot — Xóa Metadata &amp; Dấu Vết Ảnh Riêng Tư</h1>
         <p class="cs-hero-desc">
-          Xóa toàn bộ siêu dữ liệu ẩn (tọa độ GPS, số serial thiết bị, prompt AI Midjourney/ComfyUI, IPTC, C2PA Content Credentials) và re-encode ảnh sạch sẽ ngay trong bộ nhớ RAM trình duyệt. Ảnh của bạn không bao giờ được gửi lên bất kỳ máy chủ nào.
+          Xóa toàn bộ siêu dữ liệu ẩn (tọa độ GPS, serial thiết bị, prompt AI Midjourney/ComfyUI, IPTC, C2PA Content Credentials) và re-encode ảnh sạch sẽ 100% trong RAM trình duyệt.
         </p>
       </section>
 
-      <!-- Section 2: Workspace Card -->
+      <!-- Main Interactive Workspace Card -->
       <section class="cs-card">
         <!-- Drag & Drop Zone -->
         <div id="drop" class="cs-dropzone" tabindex="0" role="button" aria-label="Kéo thả hoặc bấm để chọn ảnh">
           <div class="cs-drop-icon-capsule">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--primary);">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--primary);">
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
               <polyline points="17 8 12 3 7 8"></polyline>
               <line x1="12" y1="3" x2="12" y2="15"></line>
             </svg>
           </div>
           <p class="cs-drop-title"><strong>Kéo thả ảnh vào đây</strong> hoặc bấm để chọn file</p>
-          <p class="cs-drop-subtitle">Xử lý tức thì trong RAM trình duyệt • Không nén giảm độ phân giải</p>
+          <p class="cs-drop-subtitle">Xử lý tức thì trong RAM • Giữ nguyên 100% độ sắc nét ảnh</p>
           <div class="cs-drop-tags">
             <span class="cs-drop-tag">JPG / JPEG</span>
             <span class="cs-drop-tag">PNG</span>
@@ -171,39 +170,35 @@
         </div>
       </section>
 
-      <!-- Section 3: Security & Privacy Architecture -->
-      <section class="cs-security-section">
-        <h2 class="cs-security-title">
-          <span>🔒 Kiến Trúc Bảo Vệ Quyền Riêng Tư &amp; An Toàn Tuyệt Đối</span>
-        </h2>
-        <div class="cs-features-grid">
-          <div class="cs-feature-card">
-            <div class="cs-feature-icon-box">💻</div>
-            <h3 class="cs-feature-heading">100% Client-Side Execution</h3>
-            <p class="cs-feature-text">Toàn bộ quá trình giải mã EXIF, tái dựng pixel và nén lại ảnh diễn ra trong bộ nhớ RAM trình duyệt của bạn qua Canvas API.</p>
-          </div>
-
-          <div class="cs-feature-card">
-            <div class="cs-feature-icon-box">🤖</div>
-            <h3 class="cs-feature-heading">C2PA &amp; AI Prompt Purge</h3>
-            <p class="cs-feature-text">Gỡ bỏ hoàn toàn chứng thực số C2PA / Content Credentials, chuỗi prompt và workflow node graph của Midjourney, ComfyUI, Stable Diffusion.</p>
-          </div>
-
-          <div class="cs-feature-card">
-            <div class="cs-feature-icon-box">📍</div>
-            <h3 class="cs-feature-heading">Xóa Tọa Độ GPS &amp; Thiết Bị</h3>
-            <p class="cs-feature-text">Triệt tiêu thông tin vị trí địa lý, thời gian chụp, tên phần mềm chỉnh sửa, số serial thân máy và ống kính ảnh.</p>
-          </div>
-
-          <div class="cs-feature-card">
-            <div class="cs-feature-icon-box">🛡️</div>
-            <h3 class="cs-feature-heading">Chống Thu Thập Dấu Vân Nén</h3>
-            <p class="cs-feature-text">Tùy chọn thêm nhiễu Gaussian imperceptible làm xáo trộn bảng lượng tử hóa JPEG, ngăn các mô hình phân loại truy vết nguồn gốc.</p>
+      <!-- Compact 4-Column Privacy & Trust Bar -->
+      <section class="cs-trust-bar" aria-label="Kiến trúc bảo mật">
+        <div class="cs-trust-item" title="Toàn bộ xử lý diễn ra trực tiếp trong RAM trình duyệt">
+          <span class="cs-trust-icon">💻</span>
+          <div class="cs-trust-content">
+            <strong>100% Client-Side</strong>
+            <span>Xử lý trong RAM, zero uploads</span>
           </div>
         </div>
-
-        <div class="cs-note-box">
-          <strong>Lưu ý về bản quyền &amp; an toàn:</strong> ClearShot hỗ trợ người dùng bảo vệ quyền riêng tư cá nhân khi chia sẻ hình ảnh lên mạng xã hội hoặc diễn đàn công cộng. Công cụ không can thiệp làm biến dạng nội dung hiển thị của bức ảnh và không lưu trữ bất kỳ nhật ký (logs) nào.
+        <div class="cs-trust-item" title="Gỡ bỏ hoàn toàn chữ ký số C2PA và AI Prompt">
+          <span class="cs-trust-icon">🤖</span>
+          <div class="cs-trust-content">
+            <strong>Gỡ C2PA &amp; AI Prompt</strong>
+            <span>Xóa Content Credentials &amp; graph</span>
+          </div>
+        </div>
+        <div class="cs-trust-item" title="Triệt tiêu vị trí GPS và số serial thiết bị">
+          <span class="cs-trust-icon">📍</span>
+          <div class="cs-trust-content">
+            <strong>Xóa GPS &amp; Thiết bị</strong>
+            <span>Khử vị trí, ngày giờ, serial máy</span>
+          </div>
+        </div>
+        <div class="cs-trust-item" title="Tùy chọn nhiễu Gaussian chống nhận diện dấu vân nén">
+          <span class="cs-trust-icon">🛡️</span>
+          <div class="cs-trust-content">
+            <strong>Khử Dấu Vân Nén</strong>
+            <span>Nhiễu Gaussian chống AI scan</span>
+          </div>
         </div>
       </section>
 
