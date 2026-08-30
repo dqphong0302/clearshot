@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="vi" class="dark">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NGG3TMNVXV"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-NGG3TMNVXV');
+  </script>
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ClearShot - Xóa Metadata & Bảo Vệ Quyền Riêng Tư Ảnh | phongdang.io.vn</title>
+  <meta name="description" content="Công cụ xóa metadata ảnh EXIF, GPS, IPTC, XMP, C2PA Content Credentials và AI prompt trực tiếp 100% trên trình duyệt. Không tải ảnh lên máy chủ." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22><text y=%2252%22 font-size=%2252%22>🧹</text></svg>" />
+
+  <!-- Ngăn nhấp nháy theme: áp dụng theme đã lưu trước khi paint -->
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('pd_theme');
+        if (t !== 'light' && t !== 'dark') {
+          t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        var isDark = t === 'dark';
+        document.documentElement.classList.toggle('dark', isDark);
+        document.documentElement.classList.toggle('light', !isDark);
+      } catch (e) {}
+    })();
+  </script>
+
+  <!-- Google Fonts CDN -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+
+  <!-- PhongDang UI Design System Stylesheet & App CSS -->
+  <link rel="stylesheet" href="./vendor/pdui/pdui.css">
+  <link rel="stylesheet" href="./css/app.css">
+</head>
+
+<body data-pdui-profile="tool">
+  <a class="pd-skip-link" href="#main-content">Bỏ qua đến nội dung chính</a>
+
+  <!-- Header / Topbar -->
+  <header class="header pd-header">
+    <div class="container header-inner pd-container pd-header__inner">
+      <a href="https://phongdang.io.vn" class="brand-link pd-brand">
+        <div class="brand-icon pd-brand__icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+            <circle cx="12" cy="13" r="4"></circle>
+          </svg>
+        </div>
+        <div>
+          <span class="brand-title pd-brand__title">ClearShot</span>
+          <span class="brand-sub pd-brand__subtitle">Xóa metadata &amp; Bảo vệ riêng tư</span>
+        </div>
+      </a>
+
+      <div class="header-actions pd-header__actions">
+        <button id="themeToggle" class="btn-theme" data-pd-theme-toggle title="Chuyển chế độ Sáng / Tối">
+          <span id="themeIcon" data-pd-theme-icon>☀️</span>
+          <span id="themeLabel" data-pd-theme-label>Sáng</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Showcase & Processing Area -->
+  <main id="main-content" class="main-wrapper pd-main cs-main">
+    <div class="container cs-container">
+
+      <!-- Section 1: Hero Banner -->
+      <section class="cs-hero-card">
+        <div class="cs-badge-group">
+          <span class="pd-badge badge-primary">✨ 100% Client-Side</span>
+          <span class="pd-badge badge-indigo">🛡️ Gỡ C2PA &amp; EXIF</span>
+          <span class="pd-badge badge-success">🔒 Zero Uploads</span>
+          <span class="pd-badge badge-warning">📍 Xóa Tọa Độ GPS</span>
+        </div>
+        <h1 class="cs-hero-title">ClearShot — Xóa Dấu Vết &amp; Metadata Ảnh Riêng Tư</h1>
+        <p class="cs-hero-desc">
+          Xóa toàn bộ siêu dữ liệu ẩn (tọa độ GPS, số serial thiết bị, prompt AI Midjourney/ComfyUI, IPTC, C2PA Content Credentials) và re-encode ảnh sạch sẽ ngay trong bộ nhớ RAM trình duyệt. Ảnh của bạn không bao giờ được gửi lên bất kỳ máy chủ nào.
+        </p>
+      </section>
+
+      <!-- Section 2: Workspace Card -->
+      <section class="cs-card">
+        <!-- Drag & Drop Zone -->
+        <div id="drop" class="cs-dropzone" tabindex="0" role="button" aria-label="Kéo thả hoặc bấm để chọn ảnh">
+          <div class="cs-drop-icon">📸</div>
+          <p class="cs-drop-title"><strong>Kéo thả ảnh vào đây</strong> hoặc bấm để chọn file</p>
+          <p class="cs-drop-subtitle">Hỗ trợ JPG · PNG · WEBP (Tối đa 25MB) • Xử lý tức thì</p>
+          <input type="file" id="fileInput" class="cs-file-input" accept="image/jpeg,image/png,image/webp" />
+        </div>
+
+        <!-- Result / Inspection Panel -->
+        <div class="cs-result" id="result">
+          <!-- Thumbnail & Meta info -->
+          <div class="cs-preview-row">
+            <img id="thumb" class="cs-preview-thumb" src="" alt="Xem trước ảnh" />
+            <div class="cs-preview-info">
+              <div class="cs-filename" id="fname"></div>
+              <div class="cs-file-meta" id="sizeLine"></div>
+            </div>
+          </div>
+
+          <!-- Metadata Findings Report -->
+          <div class="cs-findings-card">
+            <div class="cs-findings-header">
+              <span>🔍 Kết Quả Phân Tích Siêu Dữ Liệu (Metadata)</span>
+            </div>
+            <div class="cs-findings-list" id="findings"></div>
+          </div>
+
+          <!-- Cleaning Mode Options -->
+          <div class="cs-modes">
+            <label class="cs-mode-card active" id="modeOptSafe">
+              <div class="cs-mode-header">
+                <input type="radio" name="mode" value="safe" class="cs-mode-radio" checked />
+                <span class="cs-mode-title">🛡️ Chế độ Safe (Khuyên dùng)</span>
+              </div>
+              <p class="cs-mode-desc">Chỉ loại bỏ siêu dữ liệu nhạy cảm, giữ nguyên độ nét và chất lượng điểm ảnh 100%.</p>
+            </label>
+
+            <label class="cs-mode-card" id="modeOptParanoid">
+              <div class="cs-mode-header">
+                <input type="radio" name="mode" value="paranoid" class="cs-mode-radio" />
+                <span class="cs-mode-title">⚡ Chế độ Paranoid (Khử Dấu Vân)</span>
+              </div>
+              <p class="cs-mode-desc">Safe + thêm nhiễu Gaussian vi mô xóa sạch dấu vết bảng lượng tử JPEG gốc &amp; bộ nhận diện AI.</p>
+            </label>
+          </div>
+
+          <!-- Processing Stats -->
+          <div class="cs-stat-box">
+            <div class="cs-stat-row">
+              <span>Kích thước sau khi làm sạch:</span>
+              <b id="sizeAfter">—</b>
+            </div>
+          </div>
+
+          <!-- Action Button -->
+          <button class="pd-btn pd-btn--primary cs-action-btn" id="downloadBtn" disabled>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            <span id="downloadBtnText">Xóa metadata &amp; Tải ảnh về</span>
+          </button>
+
+          <!-- Feedback Status Text -->
+          <div class="cs-status-feedback" id="status" role="status" aria-live="polite"></div>
+        </div>
+      </section>
+
+      <!-- Section 3: Security & Privacy Architecture -->
+      <section class="cs-security-section">
+        <h2 class="cs-security-title">
+          <span>🔒 Kiến Trúc Bảo Vệ Quyền Riêng Tư &amp; An Toàn Tuyệt Đối</span>
+        </h2>
+        <div class="cs-features-grid">
+          <div class="cs-feature-card">
+            <div class="cs-feature-icon">💻</div>
+            <h3 class="cs-feature-heading">100% Client-Side Execution</h3>
+            <p class="cs-feature-text">Toàn bộ quá trình giải mã EXIF, tái dựng pixel và nén lại ảnh diễn ra trong bộ nhớ RAM trình duyệt của bạn qua Canvas API.</p>
+          </div>
+
+          <div class="cs-feature-card">
+            <div class="cs-feature-icon">🤖</div>
+            <h3 class="cs-feature-heading">C2PA &amp; AI Prompt Purge</h3>
+            <p class="cs-feature-text">Gỡ bỏ hoàn toàn chứng thực số C2PA / Content Credentials, chuỗi prompt và workflow node graph của Midjourney, ComfyUI, Stable Diffusion.</p>
+          </div>
+
+          <div class="cs-feature-card">
+            <div class="cs-feature-icon">📍</div>
+            <h3 class="cs-feature-heading">Xóa Tọa Độ GPS &amp; Thiết Bị</h3>
+            <p class="cs-feature-text">Triệt tiêu thông tin vị trí địa lý, thời gian chụp, tên phần mềm chỉnh sửa, số serial thân máy và ống kính ảnh.</p>
+          </div>
+
+          <div class="cs-feature-card">
+            <div class="cs-feature-icon">🛡️</div>
+            <h3 class="cs-feature-heading">Chống Thu Thập Dấu Vân Nén</h3>
+            <p class="cs-feature-text">Tùy chọn thêm nhiễu Gaussian imperceptible làm xáo trộn bảng lượng tử hóa JPEG, ngăn các mô hình phân loại truy vết nguồn gốc.</p>
+          </div>
+        </div>
+
+        <div class="cs-note-box">
+          <strong>Lưu ý về bản quyền &amp; an toàn:</strong> ClearShot hỗ trợ người dùng bảo vệ quyền riêng tư cá nhân khi chia sẻ hình ảnh lên mạng xã hội hoặc diễn đàn công cộng. Công cụ không can thiệp làm biến dạng nội dung hiển thị của bức ảnh và không lưu trữ bất kỳ nhật ký (logs) nào.
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="pd-footer">
+    <div class="pd-container pd-footer__inner">
+      <div class="pd-footer__copy">
+        © 2026 ClearShot • Phát triển bởi <a href="https://phongdang.io.vn" target="_blank" rel="noopener noreferrer">ThS. Đặng Quốc Phong</a> (ĐH Y Dược TP.HCM)
+      </div>
+      <div class="pd-footer__links">
+        <a href="https://phongdang.io.vn" target="_blank" rel="noopener noreferrer">phongdang.io.vn</a>
+        <a href="https://classtools.vn" target="_blank" rel="noopener noreferrer">ClassTools.vn</a>
+        <a href="https://github.com/dqphong0302" target="_blank" rel="noopener noreferrer">GitHub</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Unified PDUI Runtime & App Logic -->
+  <script type="module" src="./vendor/pdui/pdui.js"></script>
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>
