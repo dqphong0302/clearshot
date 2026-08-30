@@ -35,7 +35,7 @@
   <!-- Google Fonts CDN -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
 
   <!-- PhongDang UI Design System Stylesheet & App CSS -->
   <link rel="stylesheet" href="./vendor/pdui/pdui.css">
@@ -77,10 +77,10 @@
       <!-- Section 1: Hero Banner -->
       <section class="cs-hero-card">
         <div class="cs-badge-group">
-          <span class="pd-badge badge-primary">✨ 100% Client-Side</span>
-          <span class="pd-badge badge-indigo">🛡️ Gỡ C2PA &amp; EXIF</span>
-          <span class="pd-badge badge-success">🔒 Zero Uploads</span>
-          <span class="pd-badge badge-warning">📍 Xóa Tọa Độ GPS</span>
+          <span class="cs-hero-badge primary">✨ 100% Client-Side</span>
+          <span class="cs-hero-badge indigo">🛡️ Gỡ C2PA &amp; AI Prompt</span>
+          <span class="cs-hero-badge emerald">🔒 Zero Server Uploads</span>
+          <span class="cs-hero-badge amber">📍 Xóa Tọa Độ GPS &amp; Serial</span>
         </div>
         <h1 class="cs-hero-title">ClearShot — Xóa Dấu Vết &amp; Metadata Ảnh Riêng Tư</h1>
         <p class="cs-hero-desc">
@@ -92,9 +92,21 @@
       <section class="cs-card">
         <!-- Drag & Drop Zone -->
         <div id="drop" class="cs-dropzone" tabindex="0" role="button" aria-label="Kéo thả hoặc bấm để chọn ảnh">
-          <div class="cs-drop-icon">📸</div>
+          <div class="cs-drop-icon-capsule">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--primary);">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="17 8 12 3 7 8"></polyline>
+              <line x1="12" y1="3" x2="12" y2="15"></line>
+            </svg>
+          </div>
           <p class="cs-drop-title"><strong>Kéo thả ảnh vào đây</strong> hoặc bấm để chọn file</p>
-          <p class="cs-drop-subtitle">Hỗ trợ JPG · PNG · WEBP (Tối đa 25MB) • Xử lý tức thì</p>
+          <p class="cs-drop-subtitle">Xử lý tức thì trong RAM trình duyệt • Không nén giảm độ phân giải</p>
+          <div class="cs-drop-tags">
+            <span class="cs-drop-tag">JPG / JPEG</span>
+            <span class="cs-drop-tag">PNG</span>
+            <span class="cs-drop-tag">WEBP</span>
+            <span class="cs-drop-tag">Tối đa 25MB</span>
+          </div>
           <input type="file" id="fileInput" class="cs-file-input" accept="image/jpeg,image/png,image/webp" />
         </div>
 
@@ -145,8 +157,8 @@
           </div>
 
           <!-- Action Button -->
-          <button class="pd-btn pd-btn--primary cs-action-btn" id="downloadBtn" disabled>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <button class="cs-action-btn" id="downloadBtn" disabled>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
               <polyline points="7 10 12 15 17 10"></polyline>
               <line x1="12" y1="15" x2="12" y2="3"></line>
@@ -166,25 +178,25 @@
         </h2>
         <div class="cs-features-grid">
           <div class="cs-feature-card">
-            <div class="cs-feature-icon">💻</div>
+            <div class="cs-feature-icon-box">💻</div>
             <h3 class="cs-feature-heading">100% Client-Side Execution</h3>
             <p class="cs-feature-text">Toàn bộ quá trình giải mã EXIF, tái dựng pixel và nén lại ảnh diễn ra trong bộ nhớ RAM trình duyệt của bạn qua Canvas API.</p>
           </div>
 
           <div class="cs-feature-card">
-            <div class="cs-feature-icon">🤖</div>
+            <div class="cs-feature-icon-box">🤖</div>
             <h3 class="cs-feature-heading">C2PA &amp; AI Prompt Purge</h3>
             <p class="cs-feature-text">Gỡ bỏ hoàn toàn chứng thực số C2PA / Content Credentials, chuỗi prompt và workflow node graph của Midjourney, ComfyUI, Stable Diffusion.</p>
           </div>
 
           <div class="cs-feature-card">
-            <div class="cs-feature-icon">📍</div>
+            <div class="cs-feature-icon-box">📍</div>
             <h3 class="cs-feature-heading">Xóa Tọa Độ GPS &amp; Thiết Bị</h3>
             <p class="cs-feature-text">Triệt tiêu thông tin vị trí địa lý, thời gian chụp, tên phần mềm chỉnh sửa, số serial thân máy và ống kính ảnh.</p>
           </div>
 
           <div class="cs-feature-card">
-            <div class="cs-feature-icon">🛡️</div>
+            <div class="cs-feature-icon-box">🛡️</div>
             <h3 class="cs-feature-heading">Chống Thu Thập Dấu Vân Nén</h3>
             <p class="cs-feature-text">Tùy chọn thêm nhiễu Gaussian imperceptible làm xáo trộn bảng lượng tử hóa JPEG, ngăn các mô hình phân loại truy vết nguồn gốc.</p>
           </div>
