@@ -20,44 +20,53 @@ function tagsToFindings(tags) {
   const findings = [];
 
   if (tags.ProfileCMMType !== undefined || tags.ProfileVersion !== undefined) {
-    findings.push({ category: 'icc', label: 'ICC color profile embedded' });
+    findings.push({ category: 'icc', label: 'Hồ sơ màu ICC embedded', detail: 'ICC Profile color space configuration' });
   }
 
   if (tags.latitude !== undefined || tags.GPSLatitude !== undefined) {
-    findings.push({ category: 'gps', label: 'GPS location embedded in EXIF', detail: 'Latitude/longitude present' });
+    findings.push({
+      category: 'gps',
+      label: 'Tọa độ GPS vị trí thực tế',
+      detail: `Vĩ độ: ${tags.latitude || tags.GPSLatitude}, Kinh độ: ${tags.longitude || tags.GPSLongitude || 'Có sẵn'}`,
+    });
   }
   if (tags.Make || tags.Model) {
-    findings.push({ category: 'exif', label: `Camera/device: ${[tags.Make, tags.Model].filter(Boolean).join(' ')}` });
+    findings.push({ category: 'exif', label: `Thiết bị chụp: ${[tags.Make, tags.Model].filter(Boolean).join(' ')}` });
   }
   if (tags.Software) {
-    findings.push({ category: 'software', label: `Software tag: "${String(tags.Software).slice(0, 60)}"` });
+    findings.push({ category: 'software', label: `Phần mềm xử lý: "${String(tags.Software).slice(0, 70)}"` });
   }
   if (tags.UserComment) {
-    findings.push({ category: 'comment', label: 'UserComment present' });
+    findings.push({ category: 'comment', label: 'UserComment chú thích ẩn' });
   }
   if (tags.BodySerialNumber || tags.LensSerialNumber || tags.SerialNumber) {
-    findings.push({ category: 'device-serial', label: 'Device/lens serial number present' });
+    findings.push({
+      category: 'device-serial',
+      label: 'Số Serial thiết bị / Ống kính',
+      detail: `Body: ${tags.BodySerialNumber || tags.SerialNumber || '—'}, Lens: ${tags.LensSerialNumber || '—'}`,
+    });
   }
   if (tags.DigitalSourceType) {
     const val = String(tags.DigitalSourceType);
     findings.push({
       category: 'iptc-ai-tag',
       label: `IPTC DigitalSourceType: ${val}`,
-      detail: /trainedAlgorithmicMedia|composite/i.test(val) ? 'Explicit "this is AI-generated" IPTC tag' : undefined,
+      detail: /trainedAlgorithmicMedia|composite/i.test(val) ? 'Nhãn khai báo chính thức "Tạo bởi AI" (IPTC Standard)' : undefined,
     });
   }
   if (tags.ImageDescription || tags.Description) {
     const text = String(tags.ImageDescription || tags.Description);
     if (/--ar |--v \d|--stylize|midjourney/i.test(text)) {
-      findings.push({ category: 'ai-prompt', label: 'Midjourney prompt (Description field)' });
+      findings.push({ category: 'ai-prompt', label: 'Midjourney Prompt (Description field)', detail: text.slice(0, 100) });
     } else {
-      findings.push({ category: 'comment', label: `Description: "${text.slice(0, 60)}"` });
+      findings.push({ category: 'comment', label: `Description: "${text.slice(0, 70)}"` });
     }
   }
 
   for (const [key, label] of Object.entries(AI_TEXT_KEYS)) {
     if (tags[key] !== undefined) {
-      findings.push({ category: 'ai-prompt', label, detail: 'Embedded PNG text chunk' });
+      const valStr = typeof tags[key] === 'string' ? tags[key].slice(0, 120) : 'Embedded JSON/graph';
+      findings.push({ category: 'ai-prompt', label, detail: valStr });
     }
   }
 
@@ -79,10 +88,15 @@ function scanPngContainer(bytes, view) {
       findings.push({
         category: 'c2pa',
         label: 'C2PA / Content Credentials manifest (JUMBF)',
-        detail: `${len.toLocaleString()} bytes — declares AI/tool provenance (OpenAI, Adobe, Google, etc.)`,
+        detail: `${len.toLocaleString()} bytes — Khai báo bản quyền nguồn gốc AI (OpenAI, Adobe, Google, Microsoft)`,
       });
+    } else if (type === 'tEXt' || type === 'iTXt' || type === 'zTXt') {
+      const payload = new TextDecoder('utf-8', { fatal: false }).decode(bytes.slice(offset + 8, Math.min(offset + 8 + len, offset + 200)));
+      if (/prompt|workflow|parameters|midjourney|dall-?e|c2pa/i.test(payload)) {
+        findings.push({ category: 'ai-prompt', label: `Dấu vết AI trong PNG chunk (${type})`, detail: payload.slice(0, 100) });
+      }
     } else if (!PNG_CRITICAL.has(type) && !PNG_KNOWN_ANCILLARY.has(type)) {
-      findings.push({ category: 'unknown-chunk', label: `Unrecognized private chunk "${type}"`, detail: `${len} bytes` });
+      findings.push({ category: 'unknown-chunk', label: `Private chunk phụ "${type}"`, detail: `${len} bytes` });
     }
 
     offset += 12 + len;
@@ -105,21 +119,51 @@ function scanJpegContainer(bytes, view) {
     if (marker === 0xeb) {
       findings.push({
         category: 'c2pa',
-        label: 'C2PA / JUMBF manifest (APP11)',
-        detail: `${len.toLocaleString()} bytes — declares AI/tool provenance`,
+        label: 'C2PA / JUMBF Manifest (APP11)',
+        detail: `${len.toLocaleString()} bytes — Khai báo chứng thực nguồn gốc tạo bởi AI`,
       });
     } else if (marker === 0xed) {
       const header = String.fromCharCode(...bytes.slice(offset + 4, offset + 18));
       if (header.startsWith('Photoshop 3.0')) {
-        findings.push({ category: 'photoshop-irb', label: 'Photoshop IRB block (APP13)', detail: 'May contain IPTC IIM, edit history' });
+        findings.push({ category: 'photoshop-irb', label: 'Photoshop IRB block (APP13)', detail: 'Chứa lịch sử biên tập, IPTC IIM' });
       }
     } else if (marker === 0xfe) {
       const text = new TextDecoder('utf-8', { fatal: false }).decode(bytes.slice(offset + 4, offset + 2 + len));
-      if (/stable diffusion|midjourney|comfyui|dall-?e|novelai/i.test(text)) {
-        findings.push({ category: 'ai-prompt', label: 'AI tool signature in JPEG comment', detail: text.slice(0, 80) });
+      if (/stable diffusion|midjourney|comfyui|dall-?e|novelai|c2pa/i.test(text)) {
+        findings.push({ category: 'ai-prompt', label: 'AI signature trong JPEG comment (COM)', detail: text.slice(0, 100) });
       }
     }
     offset += 2 + len;
+  }
+  return findings;
+}
+
+function scanWebpContainer(bytes) {
+  const findings = [];
+  if (readChunkType(bytes, 0) !== 'RIFF' || readChunkType(bytes, 8) !== 'WEBP') return findings;
+
+  let offset = 12;
+  while (offset + 8 <= bytes.length) {
+    const fourcc = readChunkType(bytes, offset);
+    const size = (bytes[offset + 4] | (bytes[offset + 5] << 8) | (bytes[offset + 6] << 16) | (bytes[offset + 7] * 16777216)) >>> 0;
+    const padded = size + (size & 1);
+
+    if (offset + 8 + padded > bytes.length) break;
+
+    const upper = fourcc.trim().toUpperCase();
+    if (upper === 'EXIF') {
+      findings.push({ category: 'exif', label: 'WEBP EXIF chunk', detail: `${size} bytes — Chứa thông tin máy chụp & vị trí` });
+    } else if (upper === 'XMP') {
+      const text = new TextDecoder('utf-8', { fatal: false }).decode(bytes.slice(offset + 8, Math.min(offset + 8 + size, offset + 300)));
+      const isAI = /c2pa|openai|dall|midjourney|trainedalgorithmicmedia/i.test(text);
+      findings.push({
+        category: isAI ? 'c2pa' : 'xmp',
+        label: isAI ? 'XMP AI Provenance trong WEBP' : 'WEBP XMP Metadata',
+        detail: `${size} bytes`,
+      });
+    }
+
+    offset += 8 + padded;
   }
   return findings;
 }
@@ -141,6 +185,8 @@ export async function inspectImage(file) {
     findings.push(...scanPngContainer(bytes, view));
   } else if (file.type === 'image/jpeg') {
     findings.push(...scanJpegContainer(bytes, view));
+  } else if (file.type === 'image/webp') {
+    findings.push(...scanWebpContainer(bytes));
   }
 
   return { originalSize: file.size, findings };

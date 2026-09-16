@@ -2,7 +2,7 @@
  * ClearShot - Image Metadata Purge & Privacy Protection Tool
  * Standardized for PhongDang UI Design System (PDUI v1.6.0)
  * Designed by Quoc-Phong Dang, M.Sc. (phongdang.io.vn)
- * Single-Page Compact SaaS Layout
+ * Complete UI Overhaul Inspired by PixClean & Enhanced for PDUI
  */
 
 /* ==========================================================================
@@ -30,36 +30,34 @@ html.dark body {
 
 .cs-container {
   width: 100%;
-  max-width: 860px;
+  max-width: 900px;
   margin: 0 auto;
-  padding: 0 1rem;
+  padding: 0 1.25rem;
 }
 
 .cs-main {
   flex: 1;
-  padding-top: 1rem;
-  padding-bottom: 1.5rem;
+  padding-top: 1.5rem;
+  padding-bottom: 3rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 /* ==========================================================================
-   2. Compact Hero Header
+   2. Hero Header & Perks Grid
    ========================================================================== */
 
 .cs-hero-header {
-  text-align: center;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .cs-badge-group {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: center;
   gap: 0.4rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
 }
 
 .cs-hero-badge {
@@ -68,7 +66,7 @@ html.dark body {
   gap: 0.3rem;
   font-size: 0.71875rem;
   font-weight: 700;
-  padding: 0.2rem 0.65rem;
+  padding: 0.22rem 0.7rem;
   border-radius: var(--radius-full);
   letter-spacing: 0.02em;
 }
@@ -109,39 +107,92 @@ html.dark .cs-hero-badge.emerald {
   border-color: rgba(16, 185, 129, 0.3);
 }
 
+.cs-hero-badge.amber {
+  background: rgba(245, 158, 11, 0.08);
+  color: #b45309;
+  border: 1px solid rgba(245, 158, 11, 0.2);
+}
+
+html.dark .cs-hero-badge.amber {
+  background: rgba(245, 158, 11, 0.15);
+  color: #fcd34d;
+  border-color: rgba(245, 158, 11, 0.3);
+}
+
 .cs-hero-title {
-  font-size: 1.375rem;
+  font-size: clamp(1.5rem, 3.5vw, 2.1rem);
   font-weight: 800;
   color: var(--text-main);
-  line-height: 1.3;
-  margin: 0 0 0.25rem;
-  letter-spacing: -0.02em;
+  line-height: 1.22;
+  margin: 0 0 0.5rem;
+  letter-spacing: -0.025em;
+}
+
+.cs-highlight {
+  color: var(--primary);
+  background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+html.dark .cs-highlight {
+  background: linear-gradient(135deg, #60a5fa 0%, #93c5fd 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .cs-hero-desc {
-  font-size: 0.84375rem;
+  font-size: 0.9375rem;
   color: var(--text-muted);
-  line-height: 1.45;
-  margin: 0 auto;
-  max-width: 680px;
+  line-height: 1.55;
+  margin: 0 0 1.25rem;
+  max-width: 780px;
+}
+
+/* 6 Perks Grid */
+.cs-perks-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.55rem 1.75rem;
+}
+
+.cs-perk-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.84375rem;
+  color: var(--text-main);
+}
+
+.cs-perk-icon {
+  width: 17px;
+  height: 17px;
+  color: var(--primary);
+  flex-shrink: 0;
+}
+
+.cs-perk-item strong {
+  font-weight: 600;
 }
 
 /* ==========================================================================
-   3. Main Card & Dropzone
+   3. Main Workspace Card & Dropzone
    ========================================================================== */
 
 .cs-card {
   background: var(--bg-card);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-xl);
-  padding: 1.25rem 1.5rem;
+  padding: 1.35rem 1.5rem;
   box-shadow: 
     0 1px 3px rgba(15, 23, 42, 0.03),
     0 10px 25px -5px rgba(15, 23, 42, 0.05),
     0 20px 25px -5px rgba(30, 64, 175, 0.03);
-  margin-bottom: 0.875rem;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
   position: relative;
   overflow: hidden;
 }
@@ -163,7 +214,7 @@ html.dark .cs-card {
 .cs-dropzone {
   border: 2px dashed rgba(30, 64, 175, 0.25);
   border-radius: var(--radius-lg);
-  padding: 2rem 1.25rem;
+  padding: 2.5rem 1.5rem;
   text-align: center;
   cursor: pointer;
   background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
@@ -214,7 +265,7 @@ html.dark .cs-dropzone.drag {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 0.65rem;
+  margin-bottom: 0.75rem;
   box-shadow: 0 4px 10px rgba(30, 64, 175, 0.08);
   transition: transform var(--transition-fast);
 }
@@ -229,10 +280,10 @@ html.dark .cs-drop-icon-capsule {
 }
 
 .cs-drop-title {
-  font-size: 1.03125rem;
+  font-size: 1.0625rem;
   font-weight: 700;
   color: var(--text-main);
-  margin: 0 0 0.2rem;
+  margin: 0 0 0.25rem;
 }
 
 .cs-drop-title strong {
@@ -240,9 +291,9 @@ html.dark .cs-drop-icon-capsule {
 }
 
 .cs-drop-subtitle {
-  font-size: 0.8125rem;
+  font-size: 0.84375rem;
   color: var(--text-muted);
-  margin: 0 0 0.65rem;
+  margin: 0 0 0.75rem;
 }
 
 .cs-drop-tags {
@@ -256,7 +307,7 @@ html.dark .cs-drop-icon-capsule {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  padding: 0.2rem 0.5rem;
+  padding: 0.2rem 0.55rem;
   border-radius: var(--radius-full);
   background: var(--bg-card-subtle);
   color: var(--text-subtle);
@@ -268,21 +319,19 @@ html.dark .cs-drop-icon-capsule {
 }
 
 /* ==========================================================================
-   4. Result Panel & Preview
+   4. Result Panel: Verdict & FileCard
    ========================================================================== */
 
 .cs-result {
-  margin-top: 1.25rem;
-  background: var(--bg-card-subtle);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-lg);
-  padding: 1.25rem;
+  margin-top: 1.35rem;
   display: none;
+  flex-direction: column;
+  gap: 1.15rem;
   animation: csFadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .cs-result.show {
-  display: block;
+  display: flex;
 }
 
 @keyframes csFadeIn {
@@ -296,319 +345,481 @@ html.dark .cs-drop-icon-capsule {
   }
 }
 
-.cs-preview-row {
+/* Verdict Banner */
+.cs-verdict {
+  border-radius: var(--radius-lg);
+  padding: 1rem 1.25rem;
   display: flex;
-  gap: 1rem;
-  align-items: center;
-  margin-bottom: 1rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid var(--border-color);
+  gap: 0.85rem;
+  align-items: flex-start;
+  border: 1px solid transparent;
 }
 
-.cs-preview-thumb {
-  width: 72px;
-  height: 72px;
-  object-fit: cover;
-  border-radius: var(--radius-md);
-  border: 2px solid #ffffff;
-  background: var(--bg-card);
-  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.1);
+.cs-verdict-icon {
+  width: 26px;
+  height: 26px;
   flex-shrink: 0;
+  margin-top: 2px;
 }
 
-html.dark .cs-preview-thumb {
-  border-color: var(--border-color);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+.cs-verdict-icon svg {
+  width: 100%;
+  height: 100%;
 }
 
-.cs-preview-info {
+.cs-verdict-content {
   flex: 1;
   min-width: 0;
 }
 
-.cs-filename {
-  font-size: 0.9375rem;
+.cs-verdict-title {
+  margin: 0 0 0.25rem;
+  font-size: 1rem;
   font-weight: 700;
-  color: var(--text-main);
-  word-break: break-all;
-  font-family: var(--font-mono);
-  margin-bottom: 0.2rem;
-  line-height: 1.35;
 }
 
-.cs-file-meta {
-  font-size: 0.78125rem;
-  color: var(--text-muted);
+.cs-verdict-text {
+  margin: 0;
+  font-size: 0.84375rem;
+  line-height: 1.45;
+}
+
+.cs-verdict.detected {
+  background: rgba(245, 158, 11, 0.08);
+  border-color: rgba(245, 158, 11, 0.25);
+  color: var(--text-main);
+}
+
+.cs-verdict.detected .cs-verdict-icon {
+  color: #d97706;
+}
+
+html.dark .cs-verdict.detected {
+  background: rgba(245, 158, 11, 0.12);
+  border-color: rgba(245, 158, 11, 0.3);
+}
+
+html.dark .cs-verdict.detected .cs-verdict-icon {
+  color: #fbbf24;
+}
+
+.cs-verdict.clean {
+  background: rgba(16, 185, 129, 0.08);
+  border-color: rgba(16, 185, 129, 0.25);
+  color: var(--text-main);
+}
+
+.cs-verdict.clean .cs-verdict-icon {
+  color: #059669;
+}
+
+html.dark .cs-verdict.clean {
+  background: rgba(16, 185, 129, 0.12);
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+html.dark .cs-verdict.clean .cs-verdict-icon {
+  color: #34d399;
+}
+
+/* FileCard */
+.cs-filecard {
   display: flex;
+  gap: 1rem;
   align-items: center;
-  gap: 0.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  background: var(--bg-card-subtle);
+  padding: 0.85rem 1rem;
+}
+
+.cs-filecard-thumb {
+  width: 78px;
+  height: 78px;
+  flex-shrink: 0;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  background: 
+    linear-gradient(45deg, rgba(0,0,0,0.06) 25%, transparent 25%, transparent 75%, rgba(0,0,0,0.06) 75%) 0 0/14px 14px,
+    linear-gradient(45deg, rgba(0,0,0,0.06) 25%, transparent 25%, transparent 75%, rgba(0,0,0,0.06) 75%) 7px 7px/14px 14px;
+  display: grid;
+  place-items: center;
+}
+
+html.dark .cs-filecard-thumb {
+  background: 
+    linear-gradient(45deg, rgba(255,255,255,0.06) 25%, transparent 25%, transparent 75%, rgba(255,255,255,0.06) 75%) 0 0/14px 14px,
+    linear-gradient(45deg, rgba(255,255,255,0.06) 25%, transparent 25%, transparent 75%, rgba(255,255,255,0.06) 75%) 7px 7px/14px 14px;
+}
+
+.cs-filecard-thumb img {
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+}
+
+.cs-filecard-meta {
+  flex: 1;
+  min-width: 0;
+}
+
+.cs-filecard-name {
+  color: var(--text-main);
+  font-weight: 700;
+  font-size: 0.9375rem;
+  line-height: 1.35;
+  word-break: break-word;
+  font-family: var(--font-mono);
+}
+
+.cs-filecard-stats {
+  display: flex;
   flex-wrap: wrap;
+  gap: 0.35rem 1.25rem;
+  margin-top: 0.5rem;
+}
+
+.cs-fstat {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  font-size: 0.8125rem;
+}
+
+.cs-fstat-lbl {
+  color: var(--text-muted);
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+
+.cs-fstat-val {
+  color: var(--text-main);
+  font-weight: 600;
 }
 
 /* ==========================================================================
-   5. Metadata Findings List
+   5. Solve Grid: 2 Columns (Problem vs Solution)
    ========================================================================== */
 
-.cs-findings-card {
-  background: var(--bg-card);
+.cs-solve-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  align-items: start;
+}
+
+.cs-panel {
   border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
-  padding: 1rem 1.15rem;
-  margin-bottom: 1rem;
-  box-shadow: 0 1px 4px rgba(15, 23, 42, 0.02);
+  border-radius: var(--radius-lg);
+  background: var(--bg-card-subtle);
+  overflow: hidden;
 }
 
-.cs-findings-header {
+.cs-panel-head {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border-color);
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-bottom: 0.65rem;
-  font-size: 0.84375rem;
-  font-weight: 700;
-  color: var(--text-main);
+  justify-content: space-between;
+  gap: 0.65rem;
 }
 
+.cs-panel-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.cs-dot-warn, .cs-dot-success {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.cs-dot-warn {
+  background: #f59e0b;
+}
+
+.cs-dot-success {
+  background: #10b981;
+}
+
+.cs-panel-count {
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.cs-panel-body {
+  padding: 0.5rem;
+}
+
+/* Problem Panel Accent */
+.cs-panel-problem {
+  border-color: rgba(245, 158, 11, 0.25);
+  background: rgba(245, 158, 11, 0.03);
+}
+
+.cs-panel-problem .cs-panel-head {
+  border-bottom-color: rgba(245, 158, 11, 0.2);
+}
+
+.cs-panel-problem .cs-panel-label {
+  color: #b45309;
+}
+
+html.dark .cs-panel-problem .cs-panel-label {
+  color: #fbbf24;
+}
+
+/* Solution Panel Accent */
+.cs-panel-solution {
+  border-color: rgba(16, 185, 129, 0.25);
+  background: rgba(16, 185, 129, 0.03);
+}
+
+.cs-panel-solution .cs-panel-head {
+  border-bottom-color: rgba(16, 185, 129, 0.2);
+}
+
+.cs-panel-solution .cs-panel-label {
+  color: #047857;
+}
+
+html.dark .cs-panel-solution .cs-panel-label {
+  color: #34d399;
+}
+
+/* Findings List */
 .cs-findings-list {
   display: flex;
   flex-direction: column;
 }
 
 .cs-finding-item {
+  padding: 0.65rem 0.5rem;
+  border-bottom: 1px solid var(--border-subtle);
   display: flex;
   gap: 0.65rem;
   align-items: flex-start;
-  font-size: 0.78125rem;
-  padding: 0.5rem 0;
-  border-top: 1px solid var(--border-subtle);
 }
 
-.cs-finding-item:first-child {
-  border-top: none;
-  padding-top: 0;
+.cs-finding-item:last-child {
+  border-bottom: none;
 }
 
-.cs-badge {
+.cs-chip {
   flex-shrink: 0;
   font-size: 0.65625rem;
   font-weight: 700;
-  text-transform: uppercase;
   letter-spacing: 0.04em;
-  padding: 0.2rem 0.5rem;
+  text-transform: uppercase;
+  padding: 0.18rem 0.5rem;
   border-radius: 5px;
-  background: var(--bg-control);
-  color: var(--text-muted);
-  border: 1px solid var(--border-control);
-  white-space: nowrap;
+  margin-top: 1px;
+  min-width: 44px;
+  text-align: center;
 }
 
-.cs-badge.c2pa {
-  background: rgba(239, 68, 68, 0.1);
+.cs-chip.chip-ai {
+  background: rgba(239, 68, 68, 0.12);
   color: #dc2626;
-  border-color: rgba(239, 68, 68, 0.25);
+  border: 1px solid rgba(239, 68, 68, 0.25);
 }
 
-html.dark .cs-badge.c2pa {
+html.dark .cs-chip.chip-ai {
   background: rgba(239, 68, 68, 0.2);
   color: #f87171;
-  border-color: rgba(239, 68, 68, 0.4);
 }
 
-.cs-badge.ai-prompt {
-  background: rgba(79, 70, 229, 0.1);
-  color: #4f46e5;
-  border-color: rgba(79, 70, 229, 0.25);
-}
-
-html.dark .cs-badge.ai-prompt {
-  background: rgba(129, 140, 248, 0.2);
-  color: #a5b4fc;
-  border-color: rgba(129, 140, 248, 0.4);
-}
-
-.cs-badge.iptc-ai-tag {
-  background: rgba(217, 70, 239, 0.1);
-  color: #c026d3;
-  border-color: rgba(217, 70, 239, 0.25);
-}
-
-html.dark .cs-badge.iptc-ai-tag {
-  background: rgba(217, 70, 239, 0.2);
-  color: #f472b6;
-  border-color: rgba(217, 70, 239, 0.4);
-}
-
-.cs-badge.gps {
-  background: rgba(245, 158, 11, 0.1);
+.cs-chip.chip-meta {
+  background: rgba(245, 158, 11, 0.12);
   color: #d97706;
-  border-color: rgba(245, 158, 11, 0.25);
+  border: 1px solid rgba(245, 158, 11, 0.25);
 }
 
-html.dark .cs-badge.gps {
+html.dark .cs-chip.chip-meta {
   background: rgba(245, 158, 11, 0.2);
   color: #fbbf24;
-  border-color: rgba(245, 158, 11, 0.4);
 }
 
-.cs-badge.exif {
-  background: rgba(2, 132, 199, 0.1);
-  color: #0284c7;
-  border-color: rgba(2, 132, 199, 0.25);
-}
-
-html.dark .cs-badge.exif {
-  background: rgba(96, 165, 250, 0.2);
-  color: #60a5fa;
-  border-color: rgba(96, 165, 250, 0.4);
-}
-
-.cs-badge.icc {
-  background: rgba(16, 185, 129, 0.1);
-  color: #059669;
-  border-color: rgba(16, 185, 129, 0.25);
-}
-
-html.dark .cs-badge.icc {
-  background: rgba(16, 185, 129, 0.2);
-  color: #34d399;
-  border-color: rgba(16, 185, 129, 0.4);
+.cs-finding-text {
+  flex: 1;
+  min-width: 0;
 }
 
 .cs-finding-label {
-  color: var(--text-main);
   font-weight: 600;
+  font-size: 0.8125rem;
+  color: var(--text-main);
   line-height: 1.35;
 }
 
 .cs-finding-detail {
-  color: var(--text-muted);
   font-size: 0.71875rem;
+  color: var(--text-muted);
   margin-top: 0.15rem;
+  word-break: break-all;
   line-height: 1.35;
 }
 
 .cs-no-findings {
-  font-size: 0.875rem;
+  padding: 1rem 0.5rem;
+  font-size: 0.8125rem;
   color: #059669;
   font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  padding: 0.5rem 0;
+  text-align: center;
 }
 
 html.dark .cs-no-findings {
   color: #34d399;
 }
 
-/* ==========================================================================
-   6. Cleaning Mode Selection (Segmented Cards)
-   ========================================================================== */
-
-.cs-modes {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+/* Solution Options */
+.cs-solution-opt {
+  display: flex;
   gap: 0.75rem;
-  margin-bottom: 1rem;
-}
-
-.cs-mode-card {
-  border: 1.5px solid var(--border-color);
-  background: var(--bg-card);
+  padding: 0.75rem 0.85rem;
+  align-items: flex-start;
+  cursor: pointer;
   border-radius: var(--radius-md);
-  padding: 0.875rem 1rem;
-  cursor: pointer;
-  transition: all var(--transition-fast);
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-  position: relative;
+  transition: background var(--transition-fast);
+  border: 1px solid transparent;
+  margin-bottom: 0.35rem;
 }
 
-.cs-mode-card:hover {
-  border-color: var(--primary);
-  background: rgba(30, 64, 175, 0.02);
+.cs-solution-opt:hover {
+  background: rgba(0, 0, 0, 0.04);
 }
 
-html.dark .cs-mode-card:hover {
-  background: rgba(96, 165, 250, 0.05);
+html.dark .cs-solution-opt:hover {
+  background: rgba(255, 255, 255, 0.04);
 }
 
-.cs-mode-card.active {
-  border-color: var(--primary);
-  background: rgba(30, 64, 175, 0.04);
-  box-shadow: 
-    0 0 0 1px var(--primary),
-    0 4px 12px -2px rgba(30, 64, 175, 0.15);
+.cs-solution-opt.active {
+  background: rgba(30, 64, 175, 0.06);
+  border-color: rgba(30, 64, 175, 0.25);
 }
 
-html.dark .cs-mode-card.active {
+html.dark .cs-solution-opt.active {
   background: rgba(96, 165, 250, 0.12);
-  box-shadow: 
-    0 0 0 1px var(--primary),
-    0 4px 12px -2px rgba(0, 0, 0, 0.4);
+  border-color: rgba(96, 165, 250, 0.3);
 }
 
-.cs-mode-header {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-}
-
-.cs-mode-radio {
+.cs-opt-radio {
+  margin-top: 3px;
+  width: 16px;
+  height: 16px;
   accent-color: var(--primary);
-  width: 15px;
-  height: 15px;
-  margin: 0;
+  flex-shrink: 0;
   cursor: pointer;
 }
 
-.cs-mode-title {
+.cs-opt-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.cs-opt-title {
   font-weight: 700;
   font-size: 0.84375rem;
   color: var(--text-main);
 }
 
-.cs-mode-desc {
+.cs-opt-desc {
   font-size: 0.75rem;
   color: var(--text-muted);
   line-height: 1.4;
-  margin: 0;
-  padding-left: 1.35rem;
+  margin-top: 0.15rem;
+}
+
+.cs-opt-desc strong {
+  color: var(--text-main);
+}
+
+/* Sub-options for Re-encode */
+.cs-suboptions {
+  padding: 0.65rem 0.85rem;
+  background: var(--bg-card);
+  border: 1px dashed var(--border-control);
+  border-radius: var(--radius-md);
+  margin-top: 0.5rem;
+  display: none;
+  animation: csFadeIn 0.2s ease;
+}
+
+.cs-suboptions.show {
+  display: block;
+}
+
+.cs-sub-row {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.cs-sub-label {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.78125rem;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+.cs-select {
+  font-family: inherit;
+  font-size: 0.78125rem;
+  padding: 0.35rem 0.6rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-control);
+  background: var(--bg-card-subtle);
+  color: var(--text-main);
+  cursor: pointer;
+  outline: none;
+}
+
+.cs-range {
+  accent-color: var(--primary);
+  cursor: pointer;
+}
+
+.cs-quality-badge {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--primary);
 }
 
 /* ==========================================================================
-   7. Output Stats & Action Button
+   6. Action Button & Results Note
    ========================================================================== */
 
-.cs-stat-box {
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
-  padding: 0.75rem 1.15rem;
-  margin-bottom: 1rem;
-}
-
-.cs-stat-row {
+.cs-actions-area {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 0.65rem;
   align-items: center;
-  font-size: 0.8125rem;
-  color: var(--text-muted);
-}
-
-.cs-stat-row b {
-  color: var(--text-main);
-  font-family: var(--font-mono);
-  font-weight: 600;
+  text-align: center;
+  margin-top: 0.5rem;
 }
 
 .cs-action-btn {
-  width: 100%;
-  padding: 0.875rem 1.5rem;
+  padding: 0.85rem 2rem;
   font-size: 0.9375rem;
   font-weight: 700;
   border-radius: var(--radius-md);
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
@@ -644,24 +855,179 @@ html.dark .cs-action-btn:hover:not(:disabled) {
   box-shadow: none;
 }
 
-.cs-status-feedback {
-  font-size: 0.78125rem;
+.cs-result-note {
+  font-size: 0.8125rem;
   color: var(--text-muted);
-  margin-top: 0.75rem;
-  text-align: center;
-  min-height: 1.15rem;
-  line-height: 1.4;
-  font-weight: 500;
+}
+
+.cs-result-note.done {
+  color: #059669;
+  font-weight: 600;
+}
+
+html.dark .cs-result-note.done {
+  color: #34d399;
+}
+
+.cs-result-note b {
+  color: var(--text-main);
+  font-variant-numeric: tabular-nums;
+}
+
+.cs-status-feedback {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  min-height: 1rem;
 }
 
 /* ==========================================================================
-   8. Compact 1-Line / 4-Pill Privacy & Trust Bar
+   7. Audit Checklist Section (PixClean-Inspired 4 Groups)
+   ========================================================================== */
+
+.cs-audit {
+  margin-top: 1.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl);
+  background: var(--bg-card);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+.cs-ahead {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+  background: rgba(30, 64, 175, 0.04);
+}
+
+html.dark .cs-ahead {
+  background: rgba(96, 165, 250, 0.08);
+}
+
+.cs-eyebrow {
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--primary);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.35rem;
+}
+
+.cs-ahead h3 {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--text-main);
+  margin: 0 0 0.3rem;
+  letter-spacing: -0.01em;
+}
+
+.cs-ahead p {
+  margin: 0;
+  font-size: 0.84375rem;
+  color: var(--text-muted);
+}
+
+.cs-agroups {
+  display: flex;
+  flex-direction: column;
+}
+
+.cs-agroup {
+  padding: 1.15rem 1.5rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.cs-agroup:last-child {
+  border-bottom: none;
+}
+
+.cs-agroup h4 {
+  margin: 0 0 0.65rem;
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-main);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.cs-num {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--primary);
+  background: rgba(30, 64, 175, 0.1);
+  border-radius: 5px;
+  padding: 0.15rem 0.45rem;
+  font-weight: 600;
+}
+
+html.dark .cs-num {
+  background: rgba(96, 165, 250, 0.2);
+  color: #93c5fd;
+}
+
+.cs-acheck {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.cs-acheck li {
+  position: relative;
+  padding-left: 1.5rem;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: var(--text-muted);
+}
+
+.cs-acheck li svg {
+  position: absolute;
+  left: 0;
+  top: 3px;
+  width: 15px;
+  height: 15px;
+  color: #10b981;
+}
+
+.cs-acheck li b {
+  color: var(--text-main);
+  font-weight: 600;
+}
+
+.cs-acheck li code {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--primary);
+  background: var(--bg-card-subtle);
+  padding: 0.1rem 0.35rem;
+  border-radius: 4px;
+  border: 1px solid var(--border-subtle);
+}
+
+.cs-afoot {
+  padding: 0.85rem 1.5rem;
+  font-size: 0.78125rem;
+  color: var(--text-subtle);
+  background: var(--bg-card-subtle);
+  border-top: 1px solid var(--border-color);
+}
+
+/* ==========================================================================
+   8. Compact 4-Column Privacy & Trust Bar
    ========================================================================== */
 
 .cs-trust-bar {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 0.6rem;
+  margin-top: 1.5rem;
 }
 
 .cs-trust-item {
@@ -727,29 +1093,34 @@ html.dark .cs-trust-icon {
    ========================================================================== */
 
 @media (max-width: 768px) {
+  .cs-solve-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cs-perks-grid {
+    grid-template-columns: 1fr;
+  }
+
   .cs-trust-bar {
     grid-template-columns: 1fr 1fr;
   }
 }
 
 @media (max-width: 540px) {
-  .cs-modes {
-    grid-template-columns: 1fr;
-  }
-  
   .cs-trust-bar {
     grid-template-columns: 1fr;
   }
 
-  .cs-hero-title {
-    font-size: 1.15rem;
-  }
-  
-  .cs-card {
+  .cs-card, .cs-audit {
     padding: 1rem;
   }
   
   .cs-dropzone {
-    padding: 1.5rem 0.75rem;
+    padding: 1.75rem 0.75rem;
+  }
+
+  .cs-filecard {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }
