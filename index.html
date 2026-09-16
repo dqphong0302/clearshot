@@ -25,9 +25,7 @@
         if (t !== 'light' && t !== 'dark') {
           t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
         }
-        var isDark = t === 'dark';
-        document.documentElement.classList.toggle('dark', isDark);
-        document.documentElement.classList.toggle('light', !isDark);
+        document.documentElement.classList.toggle('dark', t === 'dark');
       } catch (e) {}
     })();
   </script>
@@ -46,24 +44,25 @@
   <a class="pd-skip-link" href="#main-content">Bỏ qua đến nội dung chính</a>
 
   <!-- Header / Topbar -->
-  <header class="header pd-header">
-    <div class="container header-inner pd-container pd-header__inner">
-      <a href="https://phongdang.io.vn" class="brand-link pd-brand">
-        <div class="brand-icon pd-brand__icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+  <header class="pd-header">
+    <div class="pd-container cs-container pd-header__inner">
+      <a href="https://phongdang.io.vn" class="pd-brand">
+        <span class="pd-brand__icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
             <circle cx="12" cy="13" r="4"></circle>
           </svg>
-        </div>
-        <div>
-          <span class="brand-title pd-brand__title">ClearShot</span>
-          <span class="brand-sub pd-brand__subtitle">Xóa metadata &amp; Dấu vết AI</span>
-        </div>
+        </span>
+        <span>
+          <span class="pd-brand__title">ClearShot</span>
+          <span class="pd-brand__subtitle">Xóa metadata &amp; dấu vết AI</span>
+        </span>
       </a>
 
-      <div class="header-actions pd-header__actions">
-        <button id="themeToggle" class="btn-theme" data-pd-theme-toggle title="Chuyển chế độ Sáng / Tối">
-          <span id="themeIcon" data-pd-theme-icon>☀️</span>
+      <div class="pd-header__actions">
+        <span class="cs-header-pill">🔒 Ảnh không rời khỏi máy bạn</span>
+        <button id="themeToggle" type="button" class="pd-btn cs-theme-btn" data-pd-theme-toggle title="Chuyển chế độ Sáng / Tối">
+          <span id="themeIcon" data-pd-theme-icon aria-hidden="true">☀️</span>
           <span id="themeLabel" data-pd-theme-label>Sáng</span>
         </button>
       </div>
@@ -71,151 +70,175 @@
   </header>
 
   <!-- Main Content Area -->
-  <main id="main-content" class="main-wrapper pd-main cs-main">
-    <div class="container cs-container">
+  <main id="main-content" class="pd-main cs-main">
+    <div class="pd-container cs-container">
 
-      <!-- Hero Header Section -->
-      <section class="cs-hero-header">
-        <div class="cs-badge-group">
-          <span class="cs-hero-badge primary">✨ 100% Client-Side</span>
-          <span class="cs-hero-badge indigo">🛡️ Gỡ C2PA &amp; AI Prompt</span>
-          <span class="cs-hero-badge emerald">⚡ Lossless Byte-Strip</span>
-          <span class="cs-hero-badge amber">🔒 Zero Server Uploads</span>
+      <!-- Hero: nội dung giới thiệu + thẻ tải ảnh -->
+      <section class="cs-hero">
+
+        <div class="cs-hero-copy">
+          <div class="cs-badge-group">
+            <span class="cs-hero-badge primary">✨ 100% Client-Side</span>
+            <span class="cs-hero-badge indigo">🛡️ Gỡ C2PA &amp; AI Prompt</span>
+            <span class="cs-hero-badge emerald">⚡ Lossless Byte-Strip</span>
+            <span class="cs-hero-badge amber">🔒 Zero Uploads</span>
+          </div>
+
+          <h1 class="cs-hero-title">Gỡ <span class="cs-highlight">dấu vết AI</span> &amp; metadata khỏi ảnh của bạn</h1>
+
+          <p class="cs-hero-desc">
+            Ảnh tạo từ ChatGPT, Gemini, Midjourney, Firefly… mang theo chữ ký C2PA khai báo “tạo bởi AI”, kèm EXIF &amp; tọa độ GPS ẩn. ClearShot đọc và xóa sạch chúng — tất cả chạy trực tiếp trong RAM trình duyệt của bạn.
+          </p>
+
+          <ul class="cs-perks-grid">
+            <li class="cs-perk-item">
+              <svg class="cs-perk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span><strong>Ảnh trông tự nhiên hơn</strong></span>
+            </li>
+            <li class="cs-perk-item">
+              <svg class="cs-perk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span><strong>Tránh bị gắn cờ khi đăng web</strong></span>
+            </li>
+            <li class="cs-perk-item">
+              <svg class="cs-perk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span><strong>Giảm dung lượng file sạch</strong></span>
+            </li>
+            <li class="cs-perk-item">
+              <svg class="cs-perk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span><strong>Xóa vị trí GPS &amp; serial máy</strong></span>
+            </li>
+            <li class="cs-perk-item">
+              <svg class="cs-perk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span><strong>Ảnh sẵn sàng xuất bản</strong></span>
+            </li>
+            <li class="cs-perk-item">
+              <svg class="cs-perk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span><strong>Nhanh, không cần cài app</strong></span>
+            </li>
+          </ul>
         </div>
-        <h1 class="cs-hero-title">Gỡ <span class="cs-highlight">dấu vết AI</span> &amp; metadata khỏi ảnh của bạn</h1>
-        <p class="cs-hero-desc">
-          Ảnh tạo từ ChatGPT, Gemini, Midjourney, Firefly… mang theo chữ ký C2PA khai báo “tạo bởi AI”, kèm EXIF &amp; tọa độ GPS ẩn. ClearShot đọc và xóa sạch chúng — tất cả chạy trực tiếp trong RAM trình duyệt của bạn.
-        </p>
 
-        <!-- 6 Hero Perks Grid -->
-        <ul class="cs-perks-grid">
-          <li class="cs-perk-item">
-            <svg class="cs-perk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            <span><strong>Ảnh trông tự nhiên hơn</strong></span>
-          </li>
-          <li class="cs-perk-item">
-            <svg class="cs-perk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            <span><strong>Tránh bị gắn cờ khi đăng web</strong></span>
-          </li>
-          <li class="cs-perk-item">
-            <svg class="cs-perk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            <span><strong>Giảm dung lượng file sạch</strong></span>
-          </li>
-          <li class="cs-perk-item">
-            <svg class="cs-perk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            <span><strong>Xóa vị trí GPS &amp; serial máy</strong></span>
-          </li>
-          <li class="cs-perk-item">
-            <svg class="cs-perk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            <span><strong>Ảnh sẵn sàng xuất bản</strong></span>
-          </li>
-          <li class="cs-perk-item">
-            <svg class="cs-perk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            <span><strong>Nhanh, không cần cài app</strong></span>
-          </li>
-        </ul>
+        <!-- Thẻ tải ảnh -->
+        <div class="pd-card cs-uploader">
+          <div class="cs-uploader-head">
+            <span class="cs-step">Bước 1</span>
+            <span class="cs-uploader-title">Chọn ảnh cần làm sạch</span>
+          </div>
+
+          <div class="cs-uploader-body">
+            <div id="drop" class="cs-dropzone" tabindex="0" role="button" aria-label="Kéo thả hoặc bấm để chọn ảnh">
+              <span class="cs-drop-icon-capsule">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  <polyline points="17 8 12 3 7 8"></polyline>
+                  <line x1="12" y1="3" x2="12" y2="15"></line>
+                </svg>
+              </span>
+              <p class="cs-drop-title"><strong>Kéo thả ảnh vào đây</strong>, hoặc bấm để chọn</p>
+              <p class="cs-drop-subtitle">Chọn file rồi xem ngay những gì đang ẩn giấu bên trong</p>
+              <div class="cs-drop-tags">
+                <span class="cs-drop-tag">JPG / JPEG</span>
+                <span class="cs-drop-tag">PNG</span>
+                <span class="cs-drop-tag">WEBP</span>
+              </div>
+              <input type="file" id="fileInput" class="cs-file-input" accept="image/jpeg,image/png,image/webp" />
+            </div>
+
+            <ul class="cs-uploader-notes">
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                Không upload, không lưu log — mọi thao tác chạy trong RAM trình duyệt
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                Xem đầy đủ phát hiện trước khi quyết định cách làm sạch
+              </li>
+            </ul>
+          </div>
+        </div>
+
       </section>
 
-      <!-- Main Workspace -->
-      <section class="cs-card">
-        <!-- Drag & Drop Zone -->
-        <div id="drop" class="cs-dropzone" tabindex="0" role="button" aria-label="Kéo thả hoặc bấm để chọn ảnh">
-          <div class="cs-drop-icon-capsule">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--primary);">
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-              <polyline points="17 8 12 3 7 8"></polyline>
-              <line x1="12" y1="3" x2="12" y2="15"></line>
-            </svg>
+      <!-- Vùng kết quả: hiện sau khi chọn ảnh -->
+      <section class="cs-result" id="result" aria-label="Kết quả phân tích ảnh">
+
+        <!-- Kết luận -->
+        <div class="cs-verdict" id="verdict">
+          <div class="cs-verdict-icon" id="verdictIcon"></div>
+          <div class="cs-verdict-content">
+            <h2 class="cs-verdict-title" id="verdictTitle"></h2>
+            <p class="cs-verdict-text" id="verdictText"></p>
           </div>
-          <p class="cs-drop-title"><strong>Kéo thả ảnh vào đây</strong>, hoặc bấm để chọn</p>
-          <p class="cs-drop-subtitle">Chọn file rồi xem ngay những gì ẩn giấu bên trong</p>
-          <div class="cs-drop-tags">
-            <span class="cs-drop-tag">JPG / JPEG</span>
-            <span class="cs-drop-tag">PNG</span>
-            <span class="cs-drop-tag">WEBP</span>
-          </div>
-          <input type="file" id="fileInput" class="cs-file-input" accept="image/jpeg,image/png,image/webp" />
         </div>
 
-        <!-- Result / Workspace Inspection Panel -->
-        <div class="cs-result" id="result">
-          
-          <!-- Dynamic Verdict Box -->
-          <div class="cs-verdict" id="verdict">
-            <div class="cs-verdict-icon" id="verdictIcon"></div>
-            <div class="cs-verdict-content">
-              <h3 class="cs-verdict-title" id="verdictTitle"></h3>
-              <p class="cs-verdict-text" id="verdictText"></p>
-            </div>
-          </div>
+        <div class="cs-workspace">
 
-          <!-- File Meta Card with Checkerboard Transparency Thumbnail -->
-          <div class="cs-filecard">
-            <div class="cs-filecard-thumb">
-              <img id="thumb" alt="Xem trước ảnh đã chọn" />
-            </div>
-            <div class="cs-filecard-meta">
-              <div class="cs-filecard-name" id="mName"></div>
-              <div class="cs-filecard-stats">
-                <span class="cs-fstat"><span class="cs-fstat-lbl">Định dạng</span><span class="cs-fstat-val mono" id="mType"></span></span>
-                <span class="cs-fstat"><span class="cs-fstat-lbl">Kích thước</span><span class="cs-fstat-val mono" id="mDim"></span></span>
-                <span class="cs-fstat"><span class="cs-fstat-lbl">Dung lượng gốc</span><span class="cs-fstat-val mono" id="mSize"></span></span>
+          <!-- Cột trái: file + phát hiện -->
+          <div class="cs-col">
+            <div class="cs-filecard">
+              <div class="cs-filecard-thumb">
+                <img id="thumb" alt="Xem trước ảnh đã chọn" />
+              </div>
+              <div class="cs-filecard-meta">
+                <div class="cs-filecard-name" id="mName"></div>
+                <div class="cs-filecard-stats">
+                  <span class="cs-fstat"><span class="cs-fstat-lbl">Định dạng</span><span class="cs-fstat-val mono" id="mType"></span></span>
+                  <span class="cs-fstat"><span class="cs-fstat-lbl">Kích thước</span><span class="cs-fstat-val mono" id="mDim"></span></span>
+                  <span class="cs-fstat"><span class="cs-fstat-lbl">Dung lượng gốc</span><span class="cs-fstat-val mono" id="mSize"></span></span>
+                </div>
               </div>
             </div>
-          </div>
 
-          <!-- 2-Column Solve Grid (Vấn đề vs Giải pháp) -->
-          <div class="cs-solve-grid">
-            
-            <!-- Left Column: Problem Panel -->
             <div class="cs-panel cs-panel-problem">
               <div class="cs-panel-head">
-                <span class="cs-panel-label"><span class="cs-dot-warn"></span>Vấn đề · Phát hiện trong file</span>
+                <span class="cs-panel-label"><span class="cs-dot-warn"></span>Bước 2 · Phát hiện trong file</span>
                 <span class="cs-panel-count" id="findingsCount"></span>
               </div>
               <div class="cs-panel-body">
                 <div class="cs-findings-list" id="findings"></div>
               </div>
             </div>
+          </div>
 
-            <!-- Right Column: Solution Panel -->
+          <!-- Cột phải: giải pháp + hành động -->
+          <div class="cs-col">
             <div class="cs-panel cs-panel-solution">
               <div class="cs-panel-head">
-                <span class="cs-panel-label"><span class="cs-dot-success"></span>Giải pháp xử lý</span>
+                <span class="cs-panel-label"><span class="cs-dot-success"></span>Bước 3 · Giải pháp xử lý</span>
               </div>
+
               <div class="cs-panel-body">
-                
-                <!-- Mode 1: Lossless Byte Strip -->
+                <!-- Chế độ 1: cắt byte không suy hao -->
                 <label class="cs-solution-opt active" id="modeOptLossless">
                   <input type="radio" name="mode" value="lossless" class="cs-opt-radio" checked />
-                  <div class="cs-opt-content">
-                    <div class="cs-opt-title">⚡ Cắt bỏ metadata (Lossless Strip)</div>
-                    <div class="cs-opt-desc">Cắt trực tiếp các chunk C2PA, EXIF, GPS, Prompt ở mức nhị phân. <strong>Giữ nguyên 100% pixel gốc</strong> — không giảm chất lượng.</div>
-                  </div>
+                  <span class="cs-opt-content">
+                    <span class="cs-opt-title">⚡ Cắt bỏ metadata (Lossless Strip)</span>
+                    <span class="cs-opt-desc">Cắt trực tiếp các chunk C2PA, EXIF, GPS, Prompt ở mức nhị phân. <strong>Giữ nguyên 100% pixel gốc</strong> — không giảm chất lượng.</span>
+                  </span>
                 </label>
 
-                <!-- Mode 2: Safe Canvas Re-encode -->
+                <!-- Chế độ 2: vẽ lại qua Canvas -->
                 <label class="cs-solution-opt" id="modeOptSafe">
                   <input type="radio" name="mode" value="safe" class="cs-opt-radio" />
-                  <div class="cs-opt-content">
-                    <div class="cs-opt-title">🛡️ Vẽ lại &amp; Chuyển đổi định dạng</div>
-                    <div class="cs-opt-desc">Giải mã &amp; vẽ lại ảnh qua Canvas, bakes góc quay EXIF, cho phép đổi format (PNG/JPG/WEBP) và chỉnh mức nén.</div>
-                  </div>
+                  <span class="cs-opt-content">
+                    <span class="cs-opt-title">🛡️ Vẽ lại &amp; Chuyển đổi định dạng</span>
+                    <span class="cs-opt-desc">Giải mã &amp; vẽ lại ảnh qua Canvas, bake góc quay EXIF, cho phép đổi format (PNG/JPG/WEBP) và chỉnh mức nén.</span>
+                  </span>
                 </label>
 
-                <!-- Mode 3: Paranoid Mode -->
+                <!-- Chế độ 3: paranoid -->
                 <label class="cs-solution-opt" id="modeOptParanoid">
                   <input type="radio" name="mode" value="paranoid" class="cs-opt-radio" />
-                  <div class="cs-opt-content">
-                    <div class="cs-opt-title">🔥 Khử dấu vân &amp; Watermark ẩn (Paranoid)</div>
-                    <div class="cs-opt-desc">Bơm nhiễu Box-Muller Gaussian vi mô để xóa sạch dấu vết bảng lượng tử JPEG &amp; watermark ẩn (SynthID).</div>
-                  </div>
+                  <span class="cs-opt-content">
+                    <span class="cs-opt-title">🔥 Khử dấu vân &amp; Watermark ẩn (Paranoid)</span>
+                    <span class="cs-opt-desc">Bơm nhiễu Box-Muller Gaussian vi mô để xóa sạch dấu vết bảng lượng tử JPEG &amp; watermark ẩn (SynthID).</span>
+                  </span>
                 </label>
 
-                <!-- Sub-options for Re-encode -->
+                <!-- Tuỳ chọn phụ khi vẽ lại -->
                 <div class="cs-suboptions" id="reencodeOptions">
                   <div class="cs-sub-row">
-                    <label class="cs-sub-label">Định dạng xuất:
+                    <label class="cs-sub-label"><span class="cs-sub-caption">Định dạng xuất</span>
                       <select id="formatSelect" class="cs-select">
                         <option value="original" selected>Giữ nguyên định dạng</option>
                         <option value="image/png">PNG (Không suy hao)</option>
@@ -223,118 +246,112 @@
                         <option value="image/webp">WEBP (Tối ưu web)</option>
                       </select>
                     </label>
-                    <label class="cs-sub-label" id="qualityField">Chất lượng:
+                    <label class="cs-sub-label" id="qualityField"><span class="cs-sub-caption">Chất lượng nén</span>
                       <input type="range" id="qualityRange" class="cs-range" min="70" max="100" value="92" />
                       <span class="cs-quality-badge" id="qualityVal">92%</span>
                     </label>
                   </div>
                 </div>
+              </div>
 
+              <div class="cs-actions-area">
+                <button class="pd-btn pd-btn--primary cs-action-btn" id="downloadBtn" disabled>
+                  <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="17 8 12 3 7 8"></polyline>
+                    <line x1="12" y1="3" x2="12" y2="15"></line>
+                  </svg>
+                  <span id="downloadBtnText">Làm sạch &amp; Tải ảnh về</span>
+                </button>
+                <div class="cs-result-note" id="doneNote"></div>
+                <div class="cs-status-feedback" id="status" role="status" aria-live="polite"></div>
               </div>
             </div>
-
-          </div>
-
-          <!-- Output Stats & Action Button -->
-          <div class="cs-actions-area">
-            <button class="cs-action-btn" id="downloadBtn" disabled>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                <polyline points="17 8 12 3 7 8"></polyline>
-                <line x1="12" y1="3" x2="12" y2="15"></line>
-              </svg>
-              <span id="downloadBtnText">Làm sạch &amp; Tải ảnh về</span>
-            </button>
-            <div class="cs-result-note" id="doneNote"></div>
-            <div class="cs-status-feedback" id="status" role="status" aria-live="polite"></div>
           </div>
 
         </div>
       </section>
 
-      <!-- Knowledge & Audit Checklist Section (PixClean-Style) -->
-      <section class="cs-audit">
+      <!-- Khối kiến thức: 4 cấp độ dấu vết -->
+      <section class="pd-card cs-audit" aria-labelledby="cs-audit-title">
         <div class="cs-ahead">
           <div class="cs-eyebrow">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
             KIẾN THỨC BẢO VỆ
           </div>
-          <h3>4 Cấp độ dấu vết AI &amp; metadata ảnh cần biết</h3>
+          <h2 id="cs-audit-title">4 Cấp độ dấu vết AI &amp; metadata ảnh cần biết</h2>
           <p>Ảnh tạo từ AI hoặc máy ảnh luôn mang theo nhiều lớp thông tin. ClearShot tổng hợp và hỗ trợ bạn xóa sạch chúng chỉ trong 1 cú bấm.</p>
         </div>
 
         <div class="cs-agroups">
-          
-          <!-- Group 1 -->
+
           <div class="cs-agroup">
-            <h4><span class="cs-num">01</span> Chữ ký chứng thực C2PA (Content Credentials)</h4>
+            <h3><span class="cs-num">01</span> Chữ ký chứng thực C2PA</h3>
             <ul class="cs-acheck">
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg><b>Chunk <code>caBX</code> trong PNG</b> — JUMBF manifest chứa chữ ký số OpenAI / Google / Microsoft</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg><b>Segment <code>APP11 (0xEB)</code> trong JPEG</b> — Khai báo provenance của Adobe Firefly / DALL-E</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg><b>XMP Claim / Assertion</b> — Khai báo <code>c2pa.action: c2pa.created</code> bởi hệ thống AI</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><b>Chunk <code>caBX</code> trong PNG</b> — JUMBF manifest chứa chữ ký số OpenAI / Google / Microsoft</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><b>Segment <code>APP11 (0xEB)</code> trong JPEG</b> — Khai báo provenance của Adobe Firefly / DALL-E</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><b>XMP Claim / Assertion</b> — Khai báo <code>c2pa.action: c2pa.created</code> bởi hệ thống AI</li>
             </ul>
           </div>
 
-          <!-- Group 2 -->
           <div class="cs-agroup">
-            <h4><span class="cs-num">02</span> Metadata &amp; Prompt tạo ảnh lồng trong file</h4>
+            <h3><span class="cs-num">02</span> Metadata &amp; Prompt tạo ảnh</h3>
             <ul class="cs-acheck">
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg><b>Stable Diffusion (A1111/WebUI)</b> — Toàn bộ prompt, negative prompt, sampler, seed trong chunk <code>parameters</code></li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg><b>ComfyUI</b> — Toàn bộ node graph JSON lồng trong chunk <code>prompt</code> và <code>workflow</code></li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg><b>Midjourney</b> — Prompt gốc và version thông số lồng trong trường <code>Description</code></li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg><b>EXIF / GPS máy chụp</b> — Tọa độ vị trí thực tế, ngày giờ, số serial thân máy và ống kính</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><b>Stable Diffusion (A1111/WebUI)</b> — Toàn bộ prompt, negative prompt, sampler, seed trong chunk <code>parameters</code></li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><b>ComfyUI</b> — Toàn bộ node graph JSON lồng trong chunk <code>prompt</code> và <code>workflow</code></li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><b>Midjourney</b> — Prompt gốc và version thông số lồng trong trường <code>Description</code></li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><b>EXIF / GPS máy chụp</b> — Tọa độ vị trí thực tế, ngày giờ, số serial thân máy và ống kính</li>
             </ul>
           </div>
 
-          <!-- Group 3 -->
           <div class="cs-agroup">
-            <h4><span class="cs-num">03</span> Watermark ẩn trong điểm ảnh (Pixel Watermark)</h4>
+            <h3><span class="cs-num">03</span> Watermark ẩn trong điểm ảnh</h3>
             <ul class="cs-acheck">
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg><b>SynthID (Google Imagen / Gemini)</b> — Watermark thống kê nhúng thẳng vào ma trận pixel</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg><b>Mẫu tần số DCT / FFT</b> — Dễ dàng triệt tiêu khi kích hoạt <strong>Chế độ Paranoid (Nhiễu Gaussian)</strong></li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><b>SynthID (Google Imagen / Gemini)</b> — Watermark thống kê nhúng thẳng vào ma trận pixel</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><b>Mẫu tần số DCT / FFT</b> — Dễ dàng triệt tiêu khi kích hoạt <strong>Chế độ Paranoid (Nhiễu Gaussian)</strong></li>
             </ul>
           </div>
 
-          <!-- Group 4 -->
           <div class="cs-agroup">
-            <h4><span class="cs-num">04</span> Dấu hiệu cấu trúc &amp; Thống kê nén</h4>
+            <h3><span class="cs-num">04</span> Dấu hiệu cấu trúc &amp; thống kê nén</h3>
             <ul class="cs-acheck">
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>Kích thước tròn đặc trưng của model: <code>1024×1024</code>, <code>1536×1024</code>, <code>1792×1024</code></li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>Thiếu bảng lượng tử hóa (quantization tables) chuẩn của máy ảnh thật</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>Kích thước tròn đặc trưng của model: <code>1024×1024</code>, <code>1536×1024</code>, <code>1792×1024</code></li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>Thiếu bảng lượng tử hóa (quantization tables) chuẩn của máy ảnh thật</li>
             </ul>
           </div>
 
         </div>
+
         <div class="cs-afoot">⚠ ClearShot hoạt động 100% trong RAM trình duyệt, không bao giờ gửi ảnh lên bất kỳ máy chủ nào.</div>
       </section>
 
-      <!-- Compact 4-Column Privacy & Trust Bar -->
+      <!-- Thanh cam kết bảo mật -->
       <section class="cs-trust-bar" aria-label="Kiến trúc bảo mật">
-        <div class="cs-trust-item" title="Toàn bộ xử lý diễn ra trực tiếp trong RAM trình duyệt">
-          <span class="cs-trust-icon">💻</span>
+        <div class="cs-trust-item">
+          <span class="cs-trust-icon" aria-hidden="true">💻</span>
           <div class="cs-trust-content">
             <strong>100% Client-Side</strong>
             <span>Xử lý trong RAM, zero uploads</span>
           </div>
         </div>
-        <div class="cs-trust-item" title="Gỡ bỏ hoàn toàn chữ ký số C2PA và AI Prompt">
-          <span class="cs-trust-icon">🤖</span>
+        <div class="cs-trust-item">
+          <span class="cs-trust-icon" aria-hidden="true">🤖</span>
           <div class="cs-trust-content">
             <strong>Gỡ C2PA &amp; AI Prompt</strong>
             <span>Xóa Content Credentials &amp; graph</span>
           </div>
         </div>
-        <div class="cs-trust-item" title="Triệt tiêu vị trí GPS và số serial thiết bị">
-          <span class="cs-trust-icon">📍</span>
+        <div class="cs-trust-item">
+          <span class="cs-trust-icon" aria-hidden="true">📍</span>
           <div class="cs-trust-content">
             <strong>Xóa GPS &amp; Thiết bị</strong>
             <span>Khử vị trí, ngày giờ, serial máy</span>
           </div>
         </div>
-        <div class="cs-trust-item" title="Tùy chọn nhiễu Gaussian chống nhận diện dấu vân nén">
-          <span class="cs-trust-icon">🛡️</span>
+        <div class="cs-trust-item">
+          <span class="cs-trust-icon" aria-hidden="true">🛡️</span>
           <div class="cs-trust-content">
-            <strong>Khử Dấu Vân Nén</strong>
+            <strong>Khử dấu vân nén</strong>
             <span>Nhiễu Gaussian chống AI scan</span>
           </div>
         </div>
@@ -345,7 +362,7 @@
 
   <!-- Footer -->
   <footer class="pd-footer">
-    <div class="pd-container pd-footer__inner">
+    <div class="pd-container cs-container pd-footer__inner">
       <div class="pd-footer__copy">
         © 2026 ClearShot • Phát triển bởi <a href="https://phongdang.io.vn" target="_blank" rel="noopener noreferrer">ThS. Đặng Quốc Phong</a> (ĐH Y Dược TP.HCM)
       </div>
