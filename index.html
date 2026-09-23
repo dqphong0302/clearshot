@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="vi" class="dark">
+<html lang="vi">
 <head>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-NGG3TMNVXV"></script>
@@ -15,7 +15,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ClearShot — Xoá Dấu Vết AI &amp; Metadata Khỏi Ảnh (C2PA, EXIF, GPS) | phongdang.io.vn</title>
   <meta name="description" content="Công cụ online gỡ chữ ký AI (C2PA/Content Credentials), EXIF, GPS, prompt AI, watermark ẩn khỏi ảnh PNG/JPG/WEBP — xử lý 100% trong RAM trình duyệt." />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22><text y=%2252%22 font-size=%2252%22>🧹</text></svg>" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%231d4f91%22/><text x=%2216%22 y=%2222%22 font-family=%22Inter,Arial,sans-serif%22 font-size=%2218%22 font-weight=%22600%22 fill=%22white%22 text-anchor=%22middle%22>C</text></svg>" />
 
   <!-- Ngăn nhấp nháy theme: áp dụng theme đã lưu trước khi paint -->
   <script>
@@ -23,7 +23,7 @@
       try {
         var t = localStorage.getItem('pd_theme');
         if (t !== 'light' && t !== 'dark') {
-          t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+          t = 'light';
         }
         document.documentElement.classList.toggle('dark', t === 'dark');
       } catch (e) {}
@@ -33,7 +33,7 @@
   <!-- Google Fonts CDN -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
 
   <!-- PhongDang UI Design System Stylesheet & App CSS -->
   <link rel="stylesheet" href="./vendor/pdui/pdui.css">
@@ -60,10 +60,9 @@
       </a>
 
       <div class="pd-header__actions">
-        <span class="cs-header-pill">🔒 Ảnh không rời khỏi máy bạn</span>
-        <button id="themeToggle" type="button" class="pd-btn cs-theme-btn" data-pd-theme-toggle title="Chuyển chế độ Sáng / Tối">
-          <span id="themeIcon" data-pd-theme-icon aria-hidden="true">☀️</span>
-          <span id="themeLabel" data-pd-theme-label>Sáng</span>
+        <span class="cs-header-pill">Ảnh không rời khỏi máy bạn</span>
+        <button id="themeToggle" type="button" class="pd-icon-btn pd-icon-btn--ghost" data-pd-theme-toggle aria-label="Chuyển giao diện Sáng / Tối" title="Sáng / Tối">
+          <span id="themeIcon" data-pd-theme-icon aria-hidden="true"></span>
         </button>
       </div>
     </div>
@@ -78,10 +77,10 @@
 
         <div class="cs-hero-copy">
           <div class="cs-badge-group">
-            <span class="cs-hero-badge primary">✨ 100% Client-Side</span>
-            <span class="cs-hero-badge indigo">🛡️ Gỡ C2PA &amp; AI Prompt</span>
-            <span class="cs-hero-badge emerald">⚡ Lossless Byte-Strip</span>
-            <span class="cs-hero-badge amber">🔒 Zero Uploads</span>
+            <span class="cs-hero-badge primary">100% Client-Side</span>
+            <span class="cs-hero-badge indigo">Gỡ C2PA &amp; AI Prompt</span>
+            <span class="cs-hero-badge emerald">Lossless Byte-Strip</span>
+            <span class="cs-hero-badge amber">Zero Uploads</span>
           </div>
 
           <h1 class="cs-hero-title">Gỡ <span class="cs-highlight">dấu vết AI</span> &amp; metadata khỏi ảnh của bạn</h1>
@@ -212,7 +211,7 @@
                 <label class="cs-solution-opt active" id="modeOptLossless">
                   <input type="radio" name="mode" value="lossless" class="cs-opt-radio" checked />
                   <span class="cs-opt-content">
-                    <span class="cs-opt-title">⚡ Cắt bỏ metadata (Lossless Strip)</span>
+                    <span class="cs-opt-title">Cắt bỏ metadata (Lossless Strip)</span>
                     <span class="cs-opt-desc">Cắt trực tiếp các chunk C2PA, EXIF, GPS, Prompt ở mức nhị phân. <strong>Giữ nguyên 100% pixel gốc</strong> — không giảm chất lượng.</span>
                   </span>
                 </label>
@@ -221,7 +220,7 @@
                 <label class="cs-solution-opt" id="modeOptSafe">
                   <input type="radio" name="mode" value="safe" class="cs-opt-radio" />
                   <span class="cs-opt-content">
-                    <span class="cs-opt-title">🛡️ Vẽ lại &amp; Chuyển đổi định dạng</span>
+                    <span class="cs-opt-title">Vẽ lại &amp; Chuyển đổi định dạng</span>
                     <span class="cs-opt-desc">Giải mã &amp; vẽ lại ảnh qua Canvas, bake góc quay EXIF, cho phép đổi format (PNG/JPG/WEBP) và chỉnh mức nén.</span>
                   </span>
                 </label>
@@ -230,7 +229,7 @@
                 <label class="cs-solution-opt" id="modeOptParanoid">
                   <input type="radio" name="mode" value="paranoid" class="cs-opt-radio" />
                   <span class="cs-opt-content">
-                    <span class="cs-opt-title">🔥 Khử dấu vân &amp; Watermark ẩn (Paranoid)</span>
+                    <span class="cs-opt-title">Khử dấu vân &amp; Watermark ẩn (Paranoid)</span>
                     <span class="cs-opt-desc">Bơm nhiễu Box-Muller Gaussian vi mô để xóa sạch dấu vết bảng lượng tử JPEG &amp; watermark ẩn (SynthID).</span>
                   </span>
                 </label>
@@ -322,34 +321,34 @@
 
         </div>
 
-        <div class="cs-afoot">⚠ ClearShot hoạt động 100% trong RAM trình duyệt, không bao giờ gửi ảnh lên bất kỳ máy chủ nào.</div>
+        <div class="cs-afoot">ClearShot hoạt động 100% trong RAM trình duyệt, không bao giờ gửi ảnh lên bất kỳ máy chủ nào.</div>
       </section>
 
       <!-- Thanh cam kết bảo mật -->
       <section class="cs-trust-bar" aria-label="Kiến trúc bảo mật">
         <div class="cs-trust-item">
-          <span class="cs-trust-icon" aria-hidden="true">💻</span>
+          <span class="cs-trust-icon" aria-hidden="true"><svg class="pd-icon" viewBox="0 0 24 24" aria-hidden="true"><rect width="20" height="14" x="2" y="3" rx="2"/><path d="M8 21h8M12 17v4"/></svg></span>
           <div class="cs-trust-content">
             <strong>100% Client-Side</strong>
             <span>Xử lý trong RAM, zero uploads</span>
           </div>
         </div>
         <div class="cs-trust-item">
-          <span class="cs-trust-icon" aria-hidden="true">🤖</span>
+          <span class="cs-trust-icon" aria-hidden="true"><svg class="pd-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2M20 14h2M15 13v2M9 13v2"/></svg></span>
           <div class="cs-trust-content">
             <strong>Gỡ C2PA &amp; AI Prompt</strong>
             <span>Xóa Content Credentials &amp; graph</span>
           </div>
         </div>
         <div class="cs-trust-item">
-          <span class="cs-trust-icon" aria-hidden="true">📍</span>
+          <span class="cs-trust-icon" aria-hidden="true"><svg class="pd-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 5-5.5 10.2-7.4 11.8a1 1 0 0 1-1.2 0C9.5 20.2 4 15 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg></span>
           <div class="cs-trust-content">
             <strong>Xóa GPS &amp; Thiết bị</strong>
             <span>Khử vị trí, ngày giờ, serial máy</span>
           </div>
         </div>
         <div class="cs-trust-item">
-          <span class="cs-trust-icon" aria-hidden="true">🛡️</span>
+          <span class="cs-trust-icon" aria-hidden="true"><svg class="pd-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg></span>
           <div class="cs-trust-content">
             <strong>Khử dấu vân nén</strong>
             <span>Nhiễu Gaussian chống AI scan</span>
@@ -362,13 +361,12 @@
 
   <!-- Footer -->
   <footer class="pd-footer">
+      <p class="pd-eco-line">Hệ sinh thái của ThS. Đặng Quốc Phong: <a href="https://phongdang.io.vn" target="_blank" rel="noopener noreferrer">phongdang.io.vn</a> · <a href="https://classtools.vn" target="_blank" rel="noopener noreferrer">classtools.vn</a></p>
     <div class="pd-container cs-container pd-footer__inner">
       <div class="pd-footer__copy">
         © 2026 ClearShot • Phát triển bởi <a href="https://phongdang.io.vn" target="_blank" rel="noopener noreferrer">ThS. Đặng Quốc Phong</a> (ĐH Y Dược TP.HCM)
       </div>
       <div class="pd-footer__links">
-        <a href="https://phongdang.io.vn" target="_blank" rel="noopener noreferrer">phongdang.io.vn</a>
-        <a href="https://classtools.vn" target="_blank" rel="noopener noreferrer">ClassTools.vn</a>
         <a href="https://github.com/dqphong0302" target="_blank" rel="noopener noreferrer">GitHub</a>
       </div>
     </div>

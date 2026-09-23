@@ -3,6 +3,9 @@
   'use strict';
 
   const STORAGE_KEY = 'pd_theme';
+  const SVG = paths => `<svg class="pd-icon" viewBox="0 0 24 24" aria-hidden="true">${paths}</svg>`;
+  const ICON_SUN = SVG('<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>');
+  const ICON_MOON = SVG('<path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>');
   const root = document.documentElement;
 
   const Theme = {
@@ -11,7 +14,8 @@
       const next = theme === 'dark' ? 'dark' : 'light';
       root.classList.toggle('dark', next === 'dark');
       try { localStorage.setItem(STORAGE_KEY, next); } catch {}
-      document.querySelectorAll('[data-pd-theme-icon]').forEach(el => { el.textContent = next === 'dark' ? '☀️' : '🌙'; });
+      // v2: icon SVG thay cho emoji — hiện mặt trời khi đang tối (bấm để sang sáng) và ngược lại.
+      document.querySelectorAll('[data-pd-theme-icon]').forEach(el => { el.innerHTML = next === 'dark' ? ICON_SUN : ICON_MOON; });
       document.querySelectorAll('[data-pd-theme-label]').forEach(el => { el.textContent = next === 'dark' ? 'Sáng' : 'Tối'; });
       document.dispatchEvent(new CustomEvent('pdui:themechange', { detail: { theme: next } }));
     },
@@ -19,7 +23,8 @@
     init() {
       let saved = null;
       try { saved = localStorage.getItem(STORAGE_KEY); } catch {}
-      this.set(saved || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
+      // v2: lần đầu vào mặc định Sáng (thương hiệu xanh & nâu trên nền trắng ngà).
+      this.set(saved === 'dark' ? 'dark' : 'light');
       document.querySelectorAll('[data-pd-theme-toggle]').forEach(button => button.addEventListener('click', () => this.toggle()));
     }
   };
@@ -34,15 +39,15 @@
         toast.className = 'pd-toast';
         toast.setAttribute('role', 'status');
         toast.setAttribute('aria-live', 'polite');
-        const icon = document.createElement('span');
-        icon.dataset.pdToastIcon = '';
+        const dot = document.createElement('span');
+        dot.className = 'pd-toast__dot';
+        dot.setAttribute('aria-hidden', 'true');
         const messageEl = document.createElement('span');
         messageEl.dataset.pdToastMessage = '';
-        toast.append(icon, messageEl);
+        toast.append(dot, messageEl);
         document.body.appendChild(toast);
       }
-      const icons = { success: '✅', error: '❌', warning: '⚠️', info: 'ℹ️' };
-      toast.querySelector('[data-pd-toast-icon]').textContent = icons[type] || 'ℹ️';
+      toast.className = `pd-toast pd-toast--${['success', 'error', 'warning', 'info'].includes(type) ? type : 'info'}`;
       toast.querySelector('[data-pd-toast-message]').textContent = String(message);
       toast.hidden = false;
       toast.classList.add('pd-toast--visible');
@@ -112,6 +117,6 @@
     }
   };
 
-  window.PDUI = { Theme, Toast, Modal, Tabs, version: '1.2.0' };
+  window.PDUI = { Theme, Toast, Modal, Tabs, version: '2.0.0' };
   document.addEventListener('DOMContentLoaded', () => { Theme.init(); Modal.init(); Tabs.init(); });
 })(window, document);
